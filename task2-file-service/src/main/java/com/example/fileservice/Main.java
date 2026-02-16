@@ -13,6 +13,7 @@ public class Main {
 
         server.createContext("/", new RootHandler());
         server.createContext("/upload", new UploadHandler());
+        server.createContext("/download", new DownloadHandler());
 
         server.start();
 
