@@ -18,7 +18,12 @@ public class FileCleaner {
 
     public void start() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.schedule(this::clean, 0, TimeUnit.HOURS);
+        scheduler.scheduleAtFixedRate(
+                this::clean,
+                0,
+                24,
+                TimeUnit.HOURS
+        );
     }
 
     private void clean() {

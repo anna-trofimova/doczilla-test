@@ -33,8 +33,12 @@ public class DownloadHandler implements HttpHandler {
             return;
         }
 
+        //Update last time when file was downloaded
+        file.setLastModified(System.currentTimeMillis());
+
         // Send file to Client
         exchange.getResponseHeaders().add("Content-Type", "application/octet-stream");
+        exchange.getResponseHeaders().add("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
         exchange.sendResponseHeaders(200, file.length());
 
         try (OutputStream os = exchange.getResponseBody();
