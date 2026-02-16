@@ -16,3 +16,8 @@ dependencies {
 application {
     mainClass = 'com.example.fileservice.Main'
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

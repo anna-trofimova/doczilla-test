@@ -15,6 +15,9 @@ public class Main {
         server.createContext("/upload", new UploadHandler());
         server.createContext("/download", new DownloadHandler());
 
+        FileCleaner cleaner = new FileCleaner("storage", 30);
+        cleaner.start();
+
         server.start();
 
         System.out.println("Server started on http://localhost:8080");
