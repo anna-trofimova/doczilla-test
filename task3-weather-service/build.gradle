@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation 'org.json:json:20230227'
     implementation 'redis.clients:jedis:4.4.3'
+    implementation 'org.knowm.xchart:xchart:3.8.1'
 }
 
 application {
