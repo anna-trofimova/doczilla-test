@@ -8,16 +8,18 @@ import java.net.http.HttpResponse;
 
 
 public class Client {
-    private  final  String BASE_URL= "https://geocoding-api.open-meteo.com/v1/search?name=Berlin";
+    private final String GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search?name=%s";
     private final HttpClient client;
 
     public Client(){
         client = HttpClient.newHttpClient();
     }
 
-    public String findAll() throws IOException, InterruptedException {
+    public String findCity(String city) throws IOException, InterruptedException {
+        String url = String.format(GEOCODING_URL, city);
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL))
+                .uri(URI.create(url))
                 .GET()
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
