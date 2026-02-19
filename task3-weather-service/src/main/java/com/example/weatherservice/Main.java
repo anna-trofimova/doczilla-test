@@ -5,9 +5,19 @@ import org.json.JSONObject;
 public class Main {
     public static void main(String[] args) throws Exception {
         Client client = new Client();
-        String cityName = "Moscow";
+
+        String cityName = args.length > 0 ? args[0] : "Berlin";
+
+        JSONObject city = client.findCity(cityName);
+
+        if (city == null) {
+            System.out.println("Город не найден: " + cityName);
+            return;
+        }
 
         JSONObject weather = client.getWeatherForCity(cityName);
+
+
 
         if (weather == null) {
             System.out.println("Город не найден: " + cityName);
