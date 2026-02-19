@@ -13,14 +13,13 @@ public class Tube {
 
     // for filled tube
     public Tube(int capacity, String[] intialDrops) {
-      this.capacity = capacity;
-      this.drops = new Stack<>();
-
-      for (int i = intialDrops.length - 1; i >= 0; i--) {
-          if (intialDrops[i] != null) {
-              drops.push(intialDrops[i]);
-          }
-      }
+        this.capacity = capacity;
+        this.drops = new Stack<>();
+        for (int i = intialDrops.length - 1; i >= 0; i--) {
+            if (intialDrops[i] != null) {
+                drops.push(intialDrops[i]);
+            }
+        }
     }
 
     public boolean isEmpty() {
@@ -81,6 +80,10 @@ public class Tube {
     @Override
     public String toString() {
         return drops.toString();
+    }
+
+    public Stack<String> getDrops() {
+        return (Stack<String>) drops.clone();
     }
 
 
