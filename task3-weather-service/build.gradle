@@ -1,0 +1,25 @@
+plugins {
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.json:json:20230227'
+    implementation 'redis.clients:jedis:4.4.3'
+    implementation 'org.knowm.xchart:xchart:3.8.1'
+}
+
+application {
+    mainClass = 'com.example.weatherservice.Main'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+}
