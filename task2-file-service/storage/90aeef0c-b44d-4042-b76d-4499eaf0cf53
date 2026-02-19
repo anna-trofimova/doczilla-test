@@ -1,0 +1,78 @@
+Weather Service Project (Task 3)
+Описание
+Это задание реализует сервис прогноза погоды по городам на Java.
+Функционал:
+	1	Получение координат города через Open-Meteo Geocoding API
+	2	Получение прогноза погоды на ближайшие 24 часа через Open-Meteo Forecast API
+	3	Кэширование данных в Redis с TTL 15 минут
+	4	Визуализация температуры по часам через XChart
+	5	Город выбирается через аргумент при запуске проекта
+
+Структура проекта
+
+doczilla-test/
+├─ build.gradle           # корневой Gradle
+├─ settings.gradle        # подключение подпроектов
+├─ task1-liquid-sort/
+├─ task2-file-service/
+└─ task3-weather-service/
+    ├─ build.gradle       # зависимости и mainClass для weather-service
+    └─ src/main/java/com/example/weatherservice/
+        ├─ Client.java       # работа с API и Redis
+        ├─ Main.java         # точка входа
+        └─ WeatherChart.java # график температуры
+
+Зависимости
+	•	Java 19 или 21
+	•	Gradle 8.x
+	•	Redis (localhost:6379)
+	•	Библиотеки (в Gradle):
+	◦	org.json:json:20230227 – для работы с JSON
+	◦	redis.clients:jedis:5.4.0 – клиент Redis
+	◦	org.knowm.xchart:xchart:3.9.2 – графики
+Все зависимости подтягиваются автоматически через Gradle.
+
+Установка и запуск
+	1	Установить Redis и запустить сервер:
+
+redis-server
+	2	Склонировать проект:
+
+git clone <репозиторий>
+cd doczilla-test
+	3	Построить все подпроекты:
+
+./gradlew build
+	4	Запустить Weather Service с указанием города (например, Moscow):
+
+./gradlew :task3-weather-service:run --args="Moscow"
+	•	Если аргумент не указан → используется город по умолчанию Berlin.
+	•	Программа выведет:
+	◦	Информацию о городе
+	◦	Прогноз температуры на 24 часа
+	◦	График температуры
+
+Пример вывода
+
+Город найден:
+{
+  "name": "Berlin",
+  "latitude": 52.52437,
+  "longitude": 13.41053,
+  "country": "Germany",
+  ...
+}
+Используем координаты: Latitude = 52.52437, Longitude = 13.41053
+Прогноз погоды (24 часа):
+{
+  "hourly": {
+    "time": ["2026-02-18T00:00", "2026-02-18T01:00", ...],
+    "temperature_2m": [2.1, 1.8, ...]
+  }
+}
+
+Особенности реализации
+	•	Redis хранит данные с TTL 15 минут, чтобы повторные запросы к одному городу были быстрыми
+	•	График строится через XChart (WeatherChart.plot(JSONObject weather))
+	•	Вся логика работы с API и Redis инкапсулирована в классе Client.java
+	•	Main.java только координирует вызовы и выводит график
