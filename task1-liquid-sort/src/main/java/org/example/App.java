@@ -19,7 +19,7 @@ public class App {
         Tube t10 = new Tube(4, new String[]{"06", "02", "06", "11"});
         Tube t11 = new Tube(4, new String[]{"04", "06", "09", "03"});
         Tube t12 = new Tube(4, new String[]{"05", "03", "12", "01"});
-        
+
 
         Tube tEmpty1 = new Tube(4);
         Tube tEmpty2 = new Tube(4);
